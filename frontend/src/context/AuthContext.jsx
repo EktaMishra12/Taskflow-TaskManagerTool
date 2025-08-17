@@ -23,9 +23,11 @@ export const AuthProvider = ({ children }) => {
             }
 
             try {
-                const response = await axios.get(`${API_URL}/api/v1/user/me`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
+                const response = await axios.get(`${API_URL}/users/me`, { 
+  withCredentials: true,
+  headers: { Authorization: `Bearer ${token}` }
+});
+
 
                 if (response.data.success) {
                     setUser(response.data.user);

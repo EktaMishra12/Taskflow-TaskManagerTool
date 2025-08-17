@@ -70,15 +70,28 @@ export async function loginUser(req, res) {
 
 // @desc    Get user profileq
 
+// @desc    Get user profile
 export async function getUserProfile(req, res) {
     const userId = req.user.id;
     try {
-        const user = await User.findById(userId).select(",name  email password");
+        console.log('getUserProfile called for user ID:', userId); // Debug log
+        
+        const user = await User.findById(userId).select("name email"); // ✅ Fixed select
+        
         if (!user) {
             return res.status(404).json({ success: false, message: "User not found" });
         }
+        
+        // ✅ SEND RESPONSE - This was missing!
+        res.status(200).json({ 
+            success: true, 
+            user: user 
+        });
+        
+        console.log('✅ getUserProfile response sent successfully');
+        
     } catch (err) {
-        console.log(err);
+        console.log('❌ Error in getUserProfile:', err);
         res.status(500).json({ success: false, message: "Server error" });
     }
 };
