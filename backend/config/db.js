@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 const connectDB = async () => {
     try {
         await mongoose.connect(
-            'mongodb+srv://emishra361:taskflow23@cluster0.qsl1h00.mongodb.net/TaskManagerTool',
+            'mongodb+srv://TaskManagement:Ajay@taskcluster0.6q72axx.mongodb.net/Taskflow',
             {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
