@@ -1,9 +1,3 @@
-// frontend/src/axios.js
-import axios from 'axios';
-
-const instance = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL,
-  withCredentials: true,
+const axiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000',
 });
-
-export default instance;

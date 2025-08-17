@@ -17,7 +17,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${API_URL}/users/login`, formData);
+      const response = await axios.post(`${API_URL}/api/users/login`, formData);
       if (response.data.success) {
         login(response.data.user, response.data.token);
         toast.success("Login successful");
@@ -43,7 +43,7 @@ const Login = () => {
           <div>
             <label className="block text-gray-700" htmlFor="login-email">Email</label>
             <input
-            id="login-email"
+              id="login-email"
               type="email"
               name="email"
               value={formData.email}
@@ -56,7 +56,7 @@ const Login = () => {
           <div>
             <label className="block text-gray-700" htmlFor="login-password">Password</label>
             <input
-            id="login-password" 
+              id="login-password"
               type="password"
               name="password"
               value={formData.password}
