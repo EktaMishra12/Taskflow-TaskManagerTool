@@ -17,7 +17,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${API_URL}/api/users/login`, formData);
+      const response = await axios.post(`${API_URL}/users/login`, formData);
       if (response.data.success) {
         login(response.data.user, response.data.token);
         toast.success("Login successful");

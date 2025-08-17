@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext();
 
-const API_URL = http://localhost:5000;
+// ✅ Move this to the top
+const API_URL = import.meta.env.VITE_BACKEND_URL;
+console.log('API_URL:', API_URL);
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -13,15 +15,14 @@ export const AuthProvider = ({ children }) => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    // ✅ Fetch user if token exists
     useEffect(() => {
-        const fetchUser = async () => {
-            if (!token) {
-                setUser(null);
-                setLoading(false);
-                return;
-            }
+        if (!token) {
+            setUser(null);
+            setLoading(false);
+            return;
+        }
 
+        const fetchUser = async () => {
             try {
                 const response = await axios.get(`${API_URL}/users/me`, { 
   withCredentials: true,
@@ -48,42 +49,25 @@ export const AuthProvider = ({ children }) => {
         fetchUser();
     }, [token]);
 
-    const login = async (email, password) => {
+    const login = async (userData, authToken) => {
         try {
             setError('');
             setLoading(true);
-
-            const response = await axios.post(`${API_URL}/api/v1/auth/login`, {
-                email,
-                password,
-            });
-
-            if (response.data.success) {
-                const { user, token } = response.data;
-                setUser(user);
-                setToken(token);
-                localStorage.setItem('token', token);
-                localStorage.setItem('user', JSON.stringify(user));
-                navigate('/tasks'); // ✅ Move redirect here
-            } else {
-                throw new Error('Login failed');
-            }
+            setUser(userData);
+            setToken(authToken);
+            localStorage.setItem('token', authToken);
         } catch (err) {
-            console.error('Login error:', err.response?.data || err.message);
-            setError('Failed to log in. Please check your credentials.');
-            setUser(null);
-            setToken('');
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
+            console.error('Login error:', err);
+            setError('Failed to log in. Please try again.');
         } finally {
             setLoading(false);
         }
     };
 
-    // ✅ Logout function
     const logout = () => {
         try {
             setError('');
+            setLoading(true);
             setUser(null);
             setToken('');
             localStorage.removeItem('token');
@@ -91,6 +75,8 @@ export const AuthProvider = ({ children }) => {
         } catch (err) {
             console.error('Logout error:', err);
             setError('Failed to log out. Please try again.');
+        } finally {
+            setLoading(false);
         }
     };
 
