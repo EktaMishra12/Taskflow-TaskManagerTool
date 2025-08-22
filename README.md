@@ -69,12 +69,6 @@ http://localhost:3000
 
 ---
 
-## 📸 Screenshots (Optional)
-
-*Add some screenshots or GIFs of your tool in action*
-
----
-
 ## 📌 Usage
 
 1. Open the TaskFlow dashboard.
@@ -117,9 +111,5 @@ This project is licensed under the **MIT License** – free to use, modify, and 
 
 **Ekta Mishra**
 
-* 🌐 [LinkedIn](https://linkedin.com/in/yourprofile)
-* 🐙 [GitHub](https://github.com/your-username)
-
----
-
-👉 Would you like me to **write this README in Markdown with badges (like build, license, tech stack icons)** so it looks even more professional on GitHub?
+* 🌐 [LinkedIn](https://www.linkedin.com/in/ekta-mishra-5734742a0?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
+* 🐙 [GitHub](https://github.com/EktaMishra12)
